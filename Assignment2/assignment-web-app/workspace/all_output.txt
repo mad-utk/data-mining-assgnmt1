@@ -1,0 +1,102 @@
+The core files for this project will be:
+
+1. `index.html`: This is the main HTML file that will serve as the entry point of the application. It will contain the basic structure of the to-do list application.
+
+2. `styles.css`: This CSS file will contain all the styles for the application. It will be responsible for the look and feel of the application.
+
+3. `app.js`: This JavaScript file will contain all the logic for the application. It will handle events like adding tasks, marking tasks as complete, and deleting tasks.
+
+Let's start with the `index.html` file:
+
+index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Todo List</h1>
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="New task">
+        <button type="submit">Add Task</button>
+    </form>
+    <ul id="task-list"></ul>
+    <script src="app.js"></script>
+</body>
+</html>
+```
+
+Next, the `styles.css` file:
+
+styles.css
+```css
+body {
+    font-family: Arial, sans-serif;
+}
+
+#task-form {
+    margin-bottom: 1em;
+}
+
+#task-input {
+    margin-right: 1em;
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#task-list li {
+    margin-bottom: 0.5em;
+    background-color: #f9f9f9;
+    padding: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#task-list li.completed {
+    text-decoration: line-through;
+}
+```
+
+Finally, the `app.js` file:
+
+app.js
+```javascript
+document.getElementById('task-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var taskInput = document.getElementById('task-input');
+    var taskList = document.getElementById('task-list');
+
+    if (taskInput.value.trim() === '') {
+        alert('Please enter a task');
+        return;
+    }
+
+    var li = document.createElement('li');
+    li.textContent = taskInput.value;
+    li.addEventListener('click', function() {
+        this.classList.toggle('completed');
+    });
+
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', function() {
+        taskList.removeChild(li);
+    });
+
+    li.appendChild(deleteButton);
+    taskList.appendChild(li);
+
+    taskInput.value = '';
+});
+```
+
+This is a simple to-do list application. The user can add tasks, mark them as complete by clicking on them, and delete them by clicking the "Delete" button. The `app.js` file contains all the logic for these functionalities. The `styles.css` file contains the styles for the application, and the `index.html` file contains the structure of the application.
